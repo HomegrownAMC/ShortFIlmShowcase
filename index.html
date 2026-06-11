@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homegrown Short Film Showcase 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0f0d0a;
+      color: #FEF6EC;
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+    }
+
+    .shrik { font-family: 'Shrikhand', serif; }
+
+    /* ================================================================
+       HERO
+       ================================================================ */
+
+    .hero {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 5rem 1.5rem 4rem;
+      overflow: hidden;
+    }
+
+    /* ─── HERO BACKGROUND IMAGE ───────────────────────────────────────
+       To use a photo behind the hero text:
+         1. Uncomment the background-image line below and set your path
+         2. Also uncomment  min-height: 100vh;  so the image fills screen
+       Example: background-image: url('your-photo.jpg');
+    ──────────────────────────────────────────────────────────────────── */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      /* min-height: 100vh; */
+      /* background-image: url('your-photo.jpg'); */
+      background-color: #0f0d0a;
+      background-size: cover;
+      background-position: center 30%;
+      z-index: 0;
+    }
+
+    /* Gradient overlay — fades photo into dark background automatically */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(10,10,8,0.25) 0%,
+        rgba(10,10,8,0.45) 50%,
+        rgba(10,10,8,0.92) 80%,
+        #0f0d0a 100%
+      );
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 680px;
+      width: 100%;
+    }
+
+    .hero-eyebrow {
+      font-size: 13px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #FCBC2E;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-title {
+      font-size: clamp(3.2rem, 9vw, 5.5rem);
+      line-height: 1.0;
+      color: #FEF6EC;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-title .accent { color: #FCBC2E; }
+
+    .hero-sub {
+      font-size: 19px;
+      color: #c0b8a8;
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.04em;
+    }
+
+    .dates-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 1.75rem;
+    }
+
+    .date-pill {
+      background: rgba(254,246,236,0.08);
+      border: 1px solid rgba(252,188,46,0.3);
+      border-radius: 40px;
+      padding: 8px 20px;
+      font-size: 15px;
+      font-weight: 500;
+      color: #FEF6EC;
+    }
+
+    .date-pill span {
+      color: #FCBC2E;
+      margin-right: 5px;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-y {
+      background: #FCBC2E;
+      color: #0f0d0a;
+      border: none;
+      border-radius: 3px;
+      padding: 16px 36px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-y:hover { background: #f0b020; }
+
+    .btn-o {
+      background: transparent;
+      color: #FEF6EC;
+      border: 1px solid rgba(254,246,236,0.3);
+      border-radius: 3px;
+      padding: 16px 36px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-o:hover { border-color: rgba(254,246,236,0.6); }
+
+    /* ================================================================
+       SHARED SECTION STYLES
+       ================================================================ */
+
+    hr.div {
+      border: none;
+      border-top: 1px solid rgba(254,246,236,0.07);
+    }
+
+    .sec {
+      padding: 3.5rem 2rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .sec-label {
+      font-size: 13px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: #F5822C;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .sec-h {
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      color: #FEF6EC;
+      margin-bottom: 1rem;
+      line-height: 1.1;
+    }
+
+    .sec-p {
+      font-size: 18px;
+      color: #b0a898;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .sec-p strong { color: #FEF6EC; font-weight: 500; }
+    .sec-p + .sec-p { margin-top: 0.9rem; }
+
+    /* ================================================================
+       STATS ROW
+       ================================================================ */
+
+    .stats {
+      display: flex;
+      border: 1px solid rgba(254,246,236,0.09);
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 2rem;
+    }
+
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 1.2rem 0.5rem;
+      border-right: 1px solid rgba(254,246,236,0.07);
+    }
+
+    .stat:last-child { border-right: none; }
+
+    .stat-n {
+      font-size: 2.6rem;
+      color: #FCBC2E;
+      line-height: 1;
+    }
+
+    .stat-l {
+      font-size: 13px;
+      color: #706050;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-top: 0.3rem;
+      font-weight: 500;
+    }
+
+    /* ================================================================
+       NIGHTS GRID
+       ================================================================ */
+
+    .nights {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+      gap: 12px;
+      margin-top: 2rem;
+    }
+
+    .night {
+      background: rgba(254,246,236,0.04);
+      border: 1px solid rgba(254,246,236,0.09);
+      border-radius: 5px;
+      padding: 1.25rem 1.1rem 1.5rem;
+      position: relative;
+    }
+
+    .night.feat { border-color: rgba(252,188,46,0.38); }
+
+    .night-badge {
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #FCBC2E;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .night-date {
+      font-size: 1.9rem;
+      color: #FEF6EC;
+      line-height: 1.1;
+    }
+
+    .night-venue {
+      font-size: 14px;
+      color: #706050;
+      margin-top: 0.35rem;
+    }
+
+    .night-desc {
+      font-size: 15px;
+      color: #9a9080;
+      margin-top: 0.6rem;
+      font-weight: 300;
+      line-height: 1.55;
+    }
+
+    .night-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: rgba(252,188,46,0.15);
+      border-radius: 0 0 5px 5px;
+    }
+
+    .night.feat .night-bar { background: #FCBC2E; }
+
+    /* ================================================================
+       FILMMAKER GRID
+       ================================================================ */
+
+    .film-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 1.75rem;
+    }
+
+    .info-b {
+      border-left: 2px solid rgba(245,130,44,0.4);
+      padding-left: 1rem;
+    }
+
+    .info-label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #F5822C;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .info-txt {
+      font-size: 16px;
+      color: #b0a898;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .info-txt strong { color: #FEF6EC; font-weight: 500; }
+
+    /* ================================================================
+       FEE WAIVER CALLOUT
+       ================================================================ */
+
+    .waiver {
+      background: rgba(156,217,222,0.07);
+      border: 1px solid rgba(156,217,222,0.22);
+      border-radius: 5px;
+      padding: 1rem 1.25rem;
+      margin-top: 1.5rem;
+      font-size: 17px;
+      color: #9CD9DE;
+      font-weight: 300;
+    }
+
+    .waiver a { color: #9CD9DE; font-weight: 500; }
+
+    /* ================================================================
+       AUDIENCE / ORANGE CARPET
+       ================================================================ */
+
+    .aud-box {
+      background: rgba(110,81,52,0.16);
+      border: 1px solid rgba(110,81,52,0.35);
+      border-radius: 5px;
+      padding: 1.5rem 1.25rem;
+      margin-top: 1.75rem;
+    }
+
+    .aud-label {
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #F5822C;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .aud-p {
+      font-size: 18px;
+      color: #c0b8a8;
+      font-weight: 300;
+      line-height: 1.65;
+    }
+
+    /* ================================================================
+       PARTNERS
+       ================================================================ */
+
+    .partners {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 1.5rem;
+    }
+
+    .ptag {
+      background: rgba(254,246,236,0.05);
+      border: 1px solid rgba(254,246,236,0.1);
+      border-radius: 3px;
+      padding: 7px 16px;
+      font-size: 15px;
+      color: #9a9080;
+    }
+
+    /* ================================================================
+       FOOTER
+       ================================================================ */
+
+    .footer {
+      background: #080705;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      border-top: 1px solid rgba(254,246,236,0.07);
+    }
+
+    .footer-logo {
+      font-size: 1.75rem;
+      color: #FEF6EC;
+      margin-bottom: 0.3rem;
+    }
+
+    .footer-sub {
+      font-size: 14px;
+      color: #4a4438;
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-size: 15px;
+      color: #605848;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover { color: #9a9080; }
+
+    .footer-copy {
+      font-size: 13px;
+      color: #3a3428;
+      margin-top: 1rem;
+    }
+
+    .signal-tag {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(252,188,46,0.25);
+      margin-top: 0.5rem;
+      display: block;
+    }
+
+    /* ================================================================
+       RESPONSIVE
+       ================================================================ */
+
+    @media (max-width: 520px) {
+      .film-grid { grid-template-columns: 1fr; }
+      .nights { grid-template-columns: 1fr; }
+      .stats { flex-direction: column; }
+      .stat { border-right: none; border-bottom: 1px solid rgba(254,246,236,0.07); }
+      .stat:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================================================================
+       HERO
+       ================================================================ -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Homegrown Arts &amp; Media Collective presents</div>
+      <h1 class="hero-title shrik">The Short Film<br><span class="accent">Showcase</span></h1>
+      <p class="hero-sub">Three nights. Three cities. No gatekeepers.</p>
+      <div class="dates-row">
+        <div class="date-pill"><span>Red Deer</span>Oct 23</div>
+        <div class="date-pill"><span>Calgary</span>Oct 24</div>
+        <div class="date-pill"><span>Industry Night</span>Oct 25</div>
+      </div>
+      <div class="cta-row">
+        <a class="btn-y" href="#">Submit your film</a>
+        <a class="btn-o" href="#">Get tickets</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="div">
+
+  <!-- ================================================================
+       WHAT IT IS
+       ================================================================ -->
+  <section class="sec">
+    <div class="sec-label">What this is</div>
+    <h2 class="sec-h shrik">Film for people who make films.</h2>
+    <p class="sec-p">The Homegrown Short Film Showcase isn't a competition. There are no judges, no ranked selections, no gatekeepers deciding whose story deserves to be seen. It's a community screening — nights of short films from Alberta filmmakers at every stage, followed by an Industry Night where the people making things meet the people who can help them make more.</p>
+    <p class="sec-p"><strong>Year Three</strong> spans Red Deer and Calgary for the first time, with a dedicated opening night for Indigenous filmmakers in Red Deer — because the first step to building an Alberta film community is actually showing up.</p>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-n shrik">46</div>
+        <div class="stat-l">Submissions (Yr 2)</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n shrik">12</div>
+        <div class="stat-l">Student films</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n shrik">3</div>
+        <div class="stat-l">Cities (Yr 3)</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="div">
+
+  <!-- ================================================================
+       THE NIGHTS
+       ================================================================ -->
+  <section class="sec">
+    <div class="sec-label">The nights</div>
+    <h2 class="sec-h shrik">Mark the dates.</h2>
+    <div class="nights">
+      <div class="night feat">
+        <div class="night-badge">Opening Night</div>
+        <div class="night-date shrik">Oct 23</div>
+        <div class="night-venue">Red Deer, AB</div>
+        <div class="night-desc">Dedicated Indigenous Filmmaker opening night — community-first, relationship-based, and long overdue.</div>
+        <div class="night-bar"></div>
+      </div>
+      <div class="night">
+        <div class="night-badge">Showcase Night</div>
+        <div class="night-date shrik">Oct 24</div>
+        <div class="night-venue">Calgary, AB</div>
+        <div class="night-desc">Short films, the Orange Carpet, and a room full of people who actually care about independent film.</div>
+        <div class="night-bar"></div>
+      </div>
+      <div class="night">
+        <div class="night-badge">Industry Night</div>
+        <div class="night-date shrik">Oct 25</div>
+        <div class="night-venue">Stonyslope Brewing Co., Calgary</div>
+        <div class="night-desc">Filmmakers, funders, producers, and collaborators. A real room. No pitch decks required.</div>
+        <div class="night-bar"></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="div">
+
+  <!-- ================================================================
+       FOR FILMMAKERS
+       ================================================================ -->
+  <section class="sec">
+    <div class="sec-label">For filmmakers</div>
+    <h2 class="sec-h shrik">Your film belongs here.</h2>
+    <p class="sec-p">We're looking for short films made by Alberta-connected filmmakers — first-timers, students, and working professionals alike. The work doesn't have to be polished. It has to be honest.</p>
+    <div class="film-grid">
+      <div class="info-b">
+        <div class="info-label">Eligibility</div>
+        <div class="info-txt">Short films from Alberta filmmakers. All genres. All experience levels. <strong>First submissions welcome.</strong></div>
+      </div>
+      <div class="info-b">
+        <div class="info-label">Format</div>
+        <div class="info-txt">Submit via <strong>FilmFreeway</strong> or <strong>Zeffy</strong>. Screeners via Vimeo, YouTube, or Drive.</div>
+      </div>
+      <div class="info-b">
+        <div class="info-label">Deadline</div>
+        <div class="info-txt"><strong>Submissions open now.</strong> Early deadline TBA. Check back for updates.</div>
+      </div>
+      <div class="info-b">
+        <div class="info-label">What we look for</div>
+        <div class="info-txt">Storytelling over polish. Specificity over spectacle. Community over credentials.</div>
+      </div>
+    </div>
+    <div class="waiver">
+      Fee waivers are available. Email <a href="mailto:community@wearehomegrown.ca">community@wearehomegrown.ca</a> — no explanation required.
+    </div>
+    <div style="margin-top:1.5rem;">
+      <a class="btn-y" href="#">Submit your film</a>
+    </div>
+  </section>
+
+  <hr class="div">
+
+  <!-- ================================================================
+       FOR AUDIENCES
+       ================================================================ -->
+  <section class="sec">
+    <div class="sec-label">For audiences</div>
+    <h2 class="sec-h shrik">Come for the films. Stay for what happens after.</h2>
+    <div class="aud-box">
+      <div class="aud-label">Orange Carpet</div>
+      <p class="aud-p">Each Showcase night opens with the Orange Carpet — our version of the red carpet, but Homegrown. Dress up. Show up. Be part of it.</p>
+    </div>
+    <p class="sec-p" style="margin-top:1.25rem;">Tickets and venue details coming soon. Follow along at <strong>@wearehomegrown</strong> or check back here.</p>
+  </section>
+
+  <hr class="div">
+
+  <!-- ================================================================
+       PARTNERS
+       ================================================================ -->
+  <section class="sec">
+    <div class="sec-label">Made possible by</div>
+    <h2 class="sec-h shrik">The community behind the community.</h2>
+    <div class="partners">
+      <div class="ptag">Calgary Arts Development</div>
+      <div class="ptag">AMPIA</div>
+      <div class="ptag">ATB Financial</div>
+      <div class="ptag">Bell's Cafe</div>
+      <div class="ptag">Stonyslope Brewing Co.</div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       FOOTER
+       ================================================================ -->
+  <footer class="footer">
+    <div class="footer-logo shrik">Homegrown</div>
+    <div class="footer-sub">Arts &amp; Media Collective · Calgary, Alberta</div>
+    <div class="footer-links">
+      <a href="#">Instagram</a>
+      <a href="#">FilmFreeway</a>
+      <a href="#">Submit</a>
+      <a href="mailto:community@wearehomegrown.ca">Contact</a>
+      <a href="#">Main Site</a>
+    </div>
+    <div class="footer-copy">© 2026 Homegrown Arts &amp; Media Collective</div>
+    <span class="signal-tag">Signal · 2026</span>
+  </footer>
+
+</body>
+</html>
